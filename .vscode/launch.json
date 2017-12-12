@@ -19,6 +19,12 @@
       "protocol": "inspector",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Debug CRA",
+      "type": "chrome",
+      "request": "launch",
+      "webRoot": "${workspaceRoot}/src"
     }
   ],
   "compounds": []
