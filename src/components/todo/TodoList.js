@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 const TodoList = (props) => {
 	const todos = props.todos.map(todo => {
 		return (
-			<TodoItem key={todo.id} {...todo}/>
+			<TodoItem handleToggle={props.handleToggle} key={todo.id} {...todo}/>
 		);
 	});
 	return (

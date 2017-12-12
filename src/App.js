@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TodoForm, TodoList } from './components/todo';
-import { addTodo, generateId } from './lib/toooHelpers';
+import { addTodo, generateId, findById, toggleTodo, updateTodo } from './lib/toooHelpers';
 import logo from './logo.svg';
 import './App.css';
 
@@ -33,6 +33,13 @@ class App extends Component {
 		e.preventDefault();
 		this.setState({errorMessage: 'Please supply a todo name'});
 	}
+
+	handleToggle = (id) => {
+		const todo = findById(id, this.state.todos);
+		const toggled = toggleTodo(todo);
+		const updatedTodos = updateTodo(this.state.todos, toggled);
+		this.setState({todos: updatedTodos});
+	}
 	render() {
 		const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
 		return (
@@ -44,7 +51,7 @@ class App extends Component {
 				<div className="todo-app">
 					{this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}
 					<TodoForm currentTodo={this.state.currentTodo} handleInputChange={this.handleInputChange} handleSubmit={submitHandler}/>
-					<TodoList todos={this.state.todos}/>
+					<TodoList handleToggle={this.handleToggle} todos={this.state.todos}/>
 					
 				</div>
 
