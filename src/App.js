@@ -5,35 +5,31 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			todos: [
-				{ id: 1, name: 'Learn JSX', isComplete: true },
-				{ id: 2, name: 'Build an awesome app', isComplete: false },
-				{ id: 3, name: 'Ship it', isComplete: false },
-			],
-			currentTodo: ''
-		};
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
-	}
-	handleInputChange(e) {
+	state = {
+		todos: [
+			{ id: 1, name: 'Learn JSX', isComplete: true },
+			{ id: 2, name: 'Build an awesome app', isComplete: false },
+			{ id: 3, name: 'Ship it', isComplete: false },
+		],
+		currentTodo: ''
+	};
+	
+	handleInputChange = (e) => {
 		this.setState({ currentTodo: e.target.value });
 	}
-	handleSubmit(e) {
+	handleSubmit = (e) => {
 		e.preventDefault();
 		const newId = generateId();
 		const newTodo = {id: newId, name: this.state.currentTodo, isComplete: false};
 		const updatedTodo = addTodo(this.state.todos, newTodo);
 		this.setState({
 			todos: updatedTodo,
-			currentTodo: ''
+			currentTodo: '',
+			errorMessage: ''
 		});
 	}
 
-	handleEmptySubmit(e) {
+	handleEmptySubmit = (e) => {
 		e.preventDefault();
 		this.setState({errorMessage: 'Please supply a todo name'});
 	}
