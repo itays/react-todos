@@ -63,4 +63,8 @@ li:hover span.delete-item {
   padding: 0 2px;
 }
 
+.Footer a.active {
+  font-weight: bold;
+}
+
 
