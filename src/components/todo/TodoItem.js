@@ -6,7 +6,7 @@ const TodoItem = (props) => {
   const handleRemove = partial(props.handleRemove, props.id);
   return (
     <li>
-      <span className="delete-item"><a href="#" onClick={handleRemove}>X</a></span>
+      <span className="delete-item"><a href="" onClick={handleRemove}>X</a></span>
       <label>
         <input type="checkbox" onChange={handleToggle} checked={props.isComplete} /> {props.name}
       </label>
