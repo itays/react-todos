@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 const TodoList = (props) => {
 	const todos = props.todos.map(todo => {
 		return (
-			<TodoItem handleToggle={props.handleToggle} key={todo.id} {...todo}/>
+			<TodoItem handleToggle={props.handleToggle} key={todo.id} {...todo} handleRemove={props.handleRemove}/>
 		);
 	});
 	return (
@@ -18,7 +18,9 @@ const TodoList = (props) => {
 };
 
 TodoList.propTypes = {
-	todos: PropTypes.array.isRequired
+	todos: PropTypes.array.isRequired,
+	handleToggle: PropTypes.func,
+	handleRemove: PropTypes.func
 }
 
 export default TodoList;

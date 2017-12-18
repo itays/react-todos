@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { partial } from '../../lib/utils';
 const TodoItem = (props) => {
   const handleToggle = partial(props.handleToggle, props.id);
+  const handleRemove = partial(props.handleRemove, props.id);
   return (
     <li>
+      <span className="delete-item"><a href="#" onClick={handleRemove}>X</a></span>
       <label>
         <input type="checkbox" onChange={handleToggle} checked={props.isComplete} /> {props.name}
       </label>
@@ -15,7 +17,8 @@ const TodoItem = (props) => {
 TodoItem.propTypes = {
   name: PropTypes.string.isRequired,
   isComplete: PropTypes.bool,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  handleRemove: PropTypes.func
 }
 
 export default TodoItem;
