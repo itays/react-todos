@@ -5,7 +5,7 @@ import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filt
 import { partial, pipe } from './lib/utils'; 
 import logo from './logo.svg';
 import './App.css';
-import { loadTodos, createTodo } from './lib/todoService';
+import { loadTodos, createTodo, saveTodo } from './lib/todoService';
 
 class App extends Component {
 	state = {
@@ -50,9 +50,12 @@ class App extends Component {
 	}
 
 	handleToggle = (id) => {
-		const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, this.state.todos));
-		const updatedTodos = getUpdatedTodos(id, this.state.todos);
+		const getToggledTodo = pipe(findById, toggleTodo);
+		const updated = getToggledTodo(id, this.state.todos);
+		const getUpdatedTodos = partial(updateTodo, this.state.todos);
+		const updatedTodos = getUpdatedTodos(updated);
 		this.setState({ todos: updatedTodos });
+		saveTodo(updated).then(() => this.showTempMessage('Todo updated'));
 	}
 	render() {
 		const displayTodos = filterTodos(this.state.todos, this.context.route);
