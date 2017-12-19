@@ -5,7 +5,7 @@ import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filt
 import { partial, pipe } from './lib/utils'; 
 import logo from './logo.svg';
 import './App.css';
-import { loadTodos } from './lib/todoService';
+import { loadTodos, createTodo } from './lib/todoService';
 
 class App extends Component {
 	state = {
@@ -36,6 +36,7 @@ class App extends Component {
 			currentTodo: '',
 			errorMessage: ''
 		});
+		createTodo(newTodo).then(() => console.log('todo added'));
 	}
 
 	handleEmptySubmit = (e) => {
