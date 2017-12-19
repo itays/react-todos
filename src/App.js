@@ -5,16 +5,17 @@ import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filt
 import { partial, pipe } from './lib/utils'; 
 import logo from './logo.svg';
 import './App.css';
+import { loadTodos } from './lib/todoService';
 
 class App extends Component {
 	state = {
-		todos: [
-			{ id: 1, name: 'Learn JSX', isComplete: true },
-			{ id: 2, name: 'Build an awesome app', isComplete: false },
-			{ id: 3, name: 'Ship it', isComplete: false },
-		],
+		todos: [],
 		currentTodo: ''
 	};
+
+	componentDidMount() {
+		loadTodos().then(todos => this.setState({todos}));
+	}
 
 	handleRemove = (id, e) => {
 		e.preventDefault();
