@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 export class Link extends Component {
-  static contextTypes = {
-    route: PropTypes.string,
-    linkHandler: PropTypes.func
-  }
   handleClick = (e) => {
     e.preventDefault();
     this.context.linkHandler(this.props.to);
@@ -19,3 +15,7 @@ export class Link extends Component {
 Link.propTypes = {
   to: PropTypes.string.isRequired
 };
+Link.contextTypes = {
+  route: PropTypes.string,
+  linkHandler: PropTypes.func
+}
